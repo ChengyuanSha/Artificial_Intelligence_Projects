@@ -159,11 +159,11 @@ def read_txt(fname):
         raise ValueError("Each line of input should consist of a single integer value, n, where n > 3 and n <= 10,000,000")
 
 # Write outputs
-def write_output(queens, fname):
-    # queens is the solution list
+def write_output(solution, fname):
+    # solution is the solution list
     print("Saving file...")
     with open(fname, "a") as f:
-        f.write(str(queens)+"\n")
+        f.write(str(solution)+"\n")
     print("Saving complete.")
 
 # Assume `nqueens.txt` is in the same folder 
@@ -183,7 +183,6 @@ def main():
         print("Steps in calculation: %d" % step)
         # visualize(n, queen)
         write_output(list(map(lambda x: x+1, queen)), "nqueens_out.txt") # +1 because require 1 based solution
-        print("")
 
 if __name__ == "__main__":
     main()
