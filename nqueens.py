@@ -119,14 +119,14 @@ def min_conflict(n, m):
                     start = time.perf_counter()
                 continue
             else:
-                for j in range(n): # Continue to check
+                for j in range(n):
                     if i != j:
                         conflict = delta(i, j, row, col, queen, n)
                         if conflict < 0:
                             break
                     if conflict < 0:
                         break
-            if conflict < 0: # When there is solution
+            if conflict < 0: # solve
                 step += 1
                 row, col, queen = update_values(row, col, queen, i, j, n)
                 c_sum += conflict
