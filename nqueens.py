@@ -106,17 +106,17 @@ def min_conflict(n, m):
     c_sum = conflict_sum(n, row, col) # sum of conflicts
     reset = 0
     step = 0
-    start = time.perf_counter()
+    start = time.time()
     while c_sum > 0:
         conflict = 0
         for i in range(m, n):
             if row[i-queen[i]+n-1]==1 and col[i+queen[i]]==1:
-                if time.perf_counter()-start > 4: # Restart when > 4
+                if time.time()-start > 4: # Restart when > 4
                     reset += 1
                     queen, row, col = initialization(n, m)
                     c_sum = conflict_sum(n, row, col)
                     step = 0
-                    start = time.perf_counter()
+                    start = time.time()
                 continue
             else:
                 for j in range(n):
@@ -179,10 +179,10 @@ def main():
     num_of_queens = read_txt(input_fname)
     for n in num_of_queens:
         m = n - with_conflict(n, [ 8, 30, 50, 80, 100]) # m is the number of queens placed in a conflict free manner
-        start = time.perf_counter()
+        start = time.time()
         print("Number of queens: %d" % n)
         queen, step = min_conflict(n, m)
-        end = time.perf_counter()
+        end = time.time()
         print("Time elapsed (in seconds): %f" % (end-start))
         print("Steps in calculation: %d" % step)
         # visualize(n, queen)
