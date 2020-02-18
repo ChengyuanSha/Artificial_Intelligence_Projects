@@ -5,5 +5,7 @@
 
 TODO:
 * Create a validation program. Check if the solution is correct 
+* Code optimization? I tried numpy. But it seems does not have an improvement.
 * Finish Report
+
 
