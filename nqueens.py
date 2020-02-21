@@ -1,4 +1,8 @@
-# By Chengyuan Sha
+# Chengyuan Sha  
+# Jacobs, Noah  
+# Li, Shengan  
+# Luo, Ruikang  
+# Pop, Chris
 # Reference: 3,000,000 Queens in less than one minute | ACM SIGART Bulletin. (1991)
 
 import os
