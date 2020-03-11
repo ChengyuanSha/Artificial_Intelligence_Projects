@@ -4,7 +4,6 @@ input = []
 inputLine = []
 inputGrid = []
 grid = []
-nextGrid = False
 
 with open('pathfinding_a.txt', 'r') as f:
     for line in f:
