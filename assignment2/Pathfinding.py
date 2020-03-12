@@ -50,6 +50,32 @@ class pathfinding:
                     f.write(char)
                 f.write("\n")
 
+    # check grids is limit
+    def checkGrid(self, grid):
+        # check the row is limit
+        if(len(grid) < 8 or len(grid) > 1024):
+            print("For the grid: ")
+            print(grid)
+            print("Take a m x n (where 8<=m<=1024 and 8<=n<=1024) input grid!\n")
+            return False
+        else:
+            # check the col is limit
+            rowLength = len(grid[0])
+            if (rowLength < 8 or rowLength > 1024):
+                print("For the grid: ")
+                print(grid)
+                print("Take a m x n (where 8<=m<=1024 and 8<=n<=1024) input grid!\n")
+                return False
+            else:
+                for line in grid:
+                    if (len(line) != rowLength):
+                        print("For the grid: ")
+                        print(grid)
+                        print("Each columns of one grid should be smae size!\n")
+                        return False
+            return True
+
+
     def start_goal_position(self, grid): # Find start point and goal point
         start_position, goal_position = None, None
         rows, cols = len(grid), len(grid[0])
@@ -154,51 +180,53 @@ class pathfinding:
         if not(is_diagonal):
             print("Part A, does not allow diagonal ")
             for grid in self.a_grids:
-                start_position, goal_position = self.start_goal_position(grid)
-                Greedy_path = self.Greedy(grid, start_position, goal_position, self.movement_without_diagonal, is_diagonal)
-                A_star_path = self.A_star(grid, start_position, goal_position, self.movement_without_diagonal, is_diagonal)
+                if(self.checkGrid(grid)):
+                    start_position, goal_position = self.start_goal_position(grid)
+                    Greedy_path = self.Greedy(grid, start_position, goal_position, self.movement_without_diagonal, is_diagonal)
+                    A_star_path = self.A_star(grid, start_position, goal_position, self.movement_without_diagonal, is_diagonal)
 
-                print("Greedy path:", Greedy_path)
-                if Greedy_path == "Not found":
-                    print("No solution found by Greedy algorithm\n")
-                else:
-                    print("Solution found by Greedy algorithm\n")
-                    # write to file
-                    self.write_file(grid, Greedy_path, self.file_a_path_out, "Greedy")
+                    print("Greedy path:", Greedy_path)
+                    if Greedy_path == "Not found":
+                        print("No solution found by Greedy algorithm\n")
+                    else:
+                        print("Solution found by Greedy algorithm\n")
+                        # write to file
+                        self.write_file(grid, Greedy_path, self.file_a_path_out, "Greedy")
 
-                print("A star path:", A_star_path)
-                if A_star_path == "Not found":
-                    print("No solution found by A* algorithm\n")
-                else:
-                    print("Solution found by A* algorithm\n")
-                    # write to file
-                    self.write_file(grid, A_star_path, self.file_a_path_out, "A*")
-                    with open(self.file_a_path_out, 'a+') as f:
-                        f.write("\n")
+                    print("A star path:", A_star_path)
+                    if A_star_path == "Not found":
+                        print("No solution found by A* algorithm\n")
+                    else:
+                        print("Solution found by A* algorithm\n")
+                        # write to file
+                        self.write_file(grid, A_star_path, self.file_a_path_out, "A*")
+                        with open(self.file_a_path_out, 'a+') as f:
+                            f.write("\n")
         else:
             print("Part B, allow diagonal ")
             for grid in self.b_grids:
-                start_position, goal_position = self.start_goal_position(grid)
-                Greedy_path = self.A_star(grid, start_position, goal_position, self.movement_with_diagonal,is_diagonal)
-                A_star_path = self.A_star(grid, start_position, goal_position, self.movement_with_diagonal,is_diagonal)
+                if (self.checkGrid(grid)):
+                    start_position, goal_position = self.start_goal_position(grid)
+                    Greedy_path = self.A_star(grid, start_position, goal_position, self.movement_with_diagonal,is_diagonal)
+                    A_star_path = self.A_star(grid, start_position, goal_position, self.movement_with_diagonal,is_diagonal)
 
-                print("Greedy path:", Greedy_path)
-                if Greedy_path == "Not found":
-                    print("No solution found by Greedy algorithm\n")
-                else:
-                    print("Solution found by Greedy algorithm\n")
-                    # write to file
-                    self.write_file(grid, Greedy_path, self.file_b_path_out, "Greedy")
+                    print("Greedy path:", Greedy_path)
+                    if Greedy_path == "Not found":
+                        print("No solution found by Greedy algorithm\n")
+                    else:
+                        print("Solution found by Greedy algorithm\n")
+                        # write to file
+                        self.write_file(grid, Greedy_path, self.file_b_path_out, "Greedy")
 
-                print("A star path:", A_star_path)
-                if A_star_path == "Not found":
-                    print("No solution found by A* algorithm\n")
-                else:
-                    print("Solution found by A* algorithm\n")
-                    # write to file
-                    self.write_file(grid, A_star_path, self.file_b_path_out, "A*")
-                    with open(self.file_b_path_out, 'a+') as f:
-                        f.write("\n")
+                    print("A star path:", A_star_path)
+                    if A_star_path == "Not found":
+                        print("No solution found by A* algorithm\n")
+                    else:
+                        print("Solution found by A* algorithm\n")
+                        # write to file
+                        self.write_file(grid, A_star_path, self.file_b_path_out, "A*")
+                        with open(self.file_b_path_out, 'a+') as f:
+                            f.write("\n")
 
 
 if __name__ == "__main__":
@@ -209,4 +237,6 @@ if __name__ == "__main__":
     pf = pathfinding()
     pf.main(False) # Without diagonal
     pf.main(True) # With diagonal
+
+
 
