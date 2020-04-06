@@ -5,7 +5,7 @@ Craig Reynolds’ boid system
 from tkinter import *
 import random as r
 import math
-from datetime import datetime  as dt
+from datetime import datetime as dt
 
 # The basic flocking model consists of three simple steering behaviors 
 # which describe how an individual boid maneuvers based on the positions and velocities its nearby flockmates
@@ -14,8 +14,8 @@ class Boid:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.velocity_x = r.randint(10, 40)
-        self.velocity_y = r.randint(10, 40)
+        self.velocity_x = r.randint(10, 30)
+        self.velocity_y = r.randint(10, 30)
         self.new_v_x = self.velocity_x
         self.new_v_y = self.velocity_y
         self.neighbors = []
@@ -94,7 +94,7 @@ class Boid:
             if abs(neighbor.x - boid.x) + abs(neighbor.y - boid.y)< 25:  # too close
                 sumX -= (neighbor.x - boid.x)
                 sumY -= (neighbor.y - boid.y)
-        return sumX / 8, sumY / 8
+        return sumX / 15, sumY / 15
 
     # rule 3 steer towards the average heading of local flockmates
     @staticmethod
@@ -111,7 +111,7 @@ class Boid:
         if len(boid.neighbors) > 0:
             sumX /= len(boid.neighbors)
             sumY /= len(boid.neighbors)
-        return (sumX - boid.velocity_x) / 4, (sumY - boid.velocity_y) / 4
+        return (sumX - boid.velocity_x) / 10, (sumY - boid.velocity_y) / 10
 
     @staticmethod
     def center(boid, center_x, center_y):
@@ -123,7 +123,7 @@ class Plot_boid:
         self.count = 0
         self.boids = []
         for i in range(num_of_boids):
-            self.boids.append(Boid(r.randint(200, 400), r.randint(300, 500)))
+            self.boids.append(Boid(r.randint(100, 500), r.randint(200, 600))) # init position
         self.root = Tk()
         self.graph = Canvas(self.root, width=550, height=650, background="#FFFFCC")
         self.graph.after(400, self.update_boids)
