@@ -15,9 +15,7 @@ class Game:
     # create a boolean board
     def create_board(self, input, width, height):
         active_position = []
-        # x is row index
         for x, row in enumerate(input):
-            # y is column index
             for y, cell in enumerate(row.strip()): # remove possible space
                 if cell == "1":
                     active_position.append((x, y))
@@ -28,17 +26,14 @@ class Game:
 
     # create a new board in the new generation
     def update(self):
-        new_board = [[False] * self.width for row in range(self.height)]
+        new_board = [[False] * self.width for _ in range(self.height)]
         for x, row in enumerate(self.board):
             for y, cell in enumerate(row):
-                # neighbours is the number of 1s around plot[x,y]
                 neighbours = self.count_neighbours(x, y)
-                # check whether[x,y] is 1 or 0
                 previous_state = self.board[x][y]
-                # live is a boolean type.
                 live = (neighbours == 3) or (neighbours == 2 and previous_state == True)
                 new_board[x][y] = live
-            # update the board to current generation
+            # update the board
         self.board = new_board
         return self
 
