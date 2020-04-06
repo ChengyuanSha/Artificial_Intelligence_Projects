@@ -29,8 +29,7 @@ class Boid:
 
     # points position for a boid, a, b is the size of boid
     def getBoidPosition(self):  
-        a = 5 
-        b = 2 
+        a, b = 5, 2
         return [self.x + a * math.cos(self.angle), self.y + a * math.sin(self.angle),
                 self.x + b * math.cos(self.angle + math.radians(100)),
                 self.y + b * math.sin(self.angle + math.radians(100)),
@@ -70,8 +69,7 @@ class Boid:
     # rule 1 steer to move toward the average position of local flockmates
     @staticmethod
     def cohension(boid):
-        sumX = 0
-        sumY = 0
+        sumX, sumY = 0, 0
         if len(boid.neighbors) == 0:
             return 0, 0
         for neighbor in boid.neighbors:
@@ -88,8 +86,7 @@ class Boid:
     # rule 2  steer to avoid crowding local flockmates
     @staticmethod
     def separation(boid):
-        sumX = 0
-        sumY = 0
+        sumX, sumY = 0, 0
         for neighbor in boid.neighbors:
             if not (Boid.isNeighbor(boid, neighbor)):  # no longer neighbor
                 boid.neighbors.remove(neighbor)
@@ -102,8 +99,7 @@ class Boid:
     # rule 3 steer towards the average heading of local flockmates
     @staticmethod
     def alignment(boid):
-        sumX = 0
-        sumY = 0
+        sumX, sumY  = 0, 0
         if len(boid.neighbors) == 0:
             return 0, 0
         for n in boid.neighbors:
@@ -118,8 +114,8 @@ class Boid:
         return (sumX - boid.velocity_x) / 4, (sumY - boid.velocity_y) / 4
 
     @staticmethod
-    def center(boid, centerX, centerY):
-        return (centerX - boid.x) / 1000, (centerY - boid.y) / 1000
+    def center(boid, center_x, center_y):
+        return (center_x - boid.x) / 1000, (center_y - boid.y) / 1000
 
 # Use TKInter to draw GUI
 class Plot_boid:
@@ -149,7 +145,7 @@ class Plot_boid:
             b.update_velocity(Boid.center(b, 400, 500))
         for i in self.boids:
             i.update_position()
-        delay = int(16 + (start - dt.now()).total_seconds() * 1000)
+        delay = int(25 + (start - dt.now()).total_seconds() * 1000)
         self.graph.after(delay, self.update_boids)
 
 
