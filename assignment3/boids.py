@@ -68,7 +68,7 @@ class Boid:
 
     # rule 1 steer to move toward the average position of local flockmates
     @staticmethod
-    def cohension(boid):
+    def cohesion(boid):
         sumX, sumY = 0, 0
         if len(boid.neighbors) == 0:
             return 0, 0
@@ -139,7 +139,7 @@ class Plot_boid:
             for bn in self.boids:
                 if not(bn in b.neighbors) and Boid.isNeighbor(b, bn):
                     b.neighbors.append(bn)
-            b.update_velocity(Boid.cohension(b))
+            b.update_velocity(Boid.cohesion(b))
             b.update_velocity(Boid.separation(b))
             b.update_velocity(Boid.alignment(b))
             b.update_velocity(Boid.center(b, 400, 500))
