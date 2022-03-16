@@ -4,7 +4,7 @@
 
 Solve 1 million queens in 12 seconds using min conflict algorithm
 
-## Assignment 2, A star and greedy path finding 
+## Assignment 2, A star and greedy path finding algorithm 
 
 
 ## Assignment 3, Aritificial life simulation 
